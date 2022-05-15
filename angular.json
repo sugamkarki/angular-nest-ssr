@@ -37,7 +37,6 @@
               }
             ],
             "styles": [
-              "client/src/assets/fonts/material-icons/material-icons.css",
               "client/src/styles/index.scss"
             ],
             "scripts": []
