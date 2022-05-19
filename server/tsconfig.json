@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "target": "es2018",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "../dist/myapp/server",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -16,6 +16,3 @@
   "files": ["./src/main.ts"],
   "exclude": ["node_modules", "dist", "types.d.ts"]
 }
-
-
-
