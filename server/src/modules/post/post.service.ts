@@ -7,9 +7,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class PostService {
   constructor(private prisma: PrismaService) {}
 
-  async findOne(
-    postWhereUniqueInput: Prisma.PostWhereUniqueInput,
-  ): Promise<Post | null> {
+  async findOne(postWhereUniqueInput: Prisma.PostWhereUniqueInput): Promise<Post | null> {
     return this.prisma.post.findUnique({
       where: postWhereUniqueInput,
     });
@@ -20,7 +18,7 @@ export class PostService {
     take?: number;
     cursor?: Prisma.PostWhereUniqueInput;
     where?: Prisma.PostWhereInput;
-    orderBy?: Prisma.PostOrderByInput;
+    orderBy?: Prisma.PostOrderByWithAggregationInput;
   }): Promise<Post[]> {
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.post.findMany({
@@ -38,10 +36,7 @@ export class PostService {
     });
   }
 
-  async update(params: {
-    where: Prisma.PostWhereUniqueInput;
-    data: Prisma.PostUpdateInput;
-  }): Promise<Post> {
+  async update(params: { where: Prisma.PostWhereUniqueInput; data: Prisma.PostUpdateInput }): Promise<Post> {
     const { data, where } = params;
     return this.prisma.post.update({
       data,
