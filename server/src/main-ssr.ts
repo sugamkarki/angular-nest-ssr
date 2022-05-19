@@ -2,7 +2,7 @@ declare const Express: any;
 
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AppSSRModule } from './app-ssr.module';
+import { AppSSRModule } from './modules/app/app-ssr.module';
 import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
