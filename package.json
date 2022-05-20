@@ -25,7 +25,8 @@
     "prerender": "ng run myapp:prerender",
     "release": "standard-version",
     "heroku-postbuild": "npm run build:ssr",
-    "start": "npm run serve:ssr"
+    "start": "npm run serve:ssr",
+    "migrate:dev": "prisma migrate dev"
   },
   "dependencies": {
     "@angular-builders/custom-webpack": "^13.1.0",
