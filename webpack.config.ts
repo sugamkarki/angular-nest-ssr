@@ -1,39 +1,31 @@
-import { Configuration, IgnorePlugin } from 'webpack'
-import {
-  CustomWebpackBrowserSchema,
-  TargetOptions
-} from '@angular-builders/custom-webpack'
-import nodeExternals from 'webpack-node-externals'
+import { Configuration, IgnorePlugin } from 'webpack';
+import { CustomWebpackBrowserSchema, TargetOptions } from '@angular-builders/custom-webpack';
+import nodeExternals from 'webpack-node-externals';
 
-export default (
-  config: Configuration,
-  _options: CustomWebpackBrowserSchema,
-  targetOptions: TargetOptions
-) => {
+export default (config: Configuration, _options: CustomWebpackBrowserSchema, targetOptions: TargetOptions) => {
   if (targetOptions.target === 'server') {
-    config.resolve?.extensions?.push('.mjs', '.graphql', '.gql')
+    config.resolve?.extensions?.push('.mjs', '.graphql', '.gql');
 
     config.module?.rules?.push({
       test: /\.mjs$/,
       include: /node_modules/,
-      type: 'javascript/auto'
+      type: 'javascript/auto',
+      exclude: '/node_modules/',
     });
-
     config.externalsPresets = { node: true };
 
-    (config.externals as Array<any>).push(
-      nodeExternals({ allowlist: [/^(?!(livereload|concurrently|fsevents)).*/]})
-    );
+    (config.externals as Array<any>).push(nodeExternals({ allowlist: [/^(?!(livereload|concurrently|fsevents)).*/] }));
 
     config.plugins?.push(
       new IgnorePlugin({
         checkResource: (resource: string) => {
           const lazyImports = [
-            "@nestjs/microservices",
-            "@nestjs/microservices/microservices-module",
-            "@nestjs/websockets",
-            "@nestjs/websockets/socket-module",
-            "cache-manager"
+            '@nestjs/microservices',
+            '@nestjs/microservices/microservices-module',
+            '@nestjs/websockets',
+            '@nestjs/websockets/socket-module',
+            'cache-manager',
+            'class-transformer',
           ];
 
           if (!lazyImports.includes(resource)) {
@@ -41,12 +33,12 @@ export default (
           }
 
           try {
-            require.resolve(resource)
+            require.resolve(resource);
           } catch (_err: any) {
             return true;
           }
           return false;
-        }
+        },
       })
     );
   }
